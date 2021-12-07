@@ -1,4 +1,4 @@
-# hello-world
+# A basic Vue.js project for learning purpose.
 
 ## Project setup
 ```
