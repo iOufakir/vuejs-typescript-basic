@@ -32,6 +32,16 @@ export default {
           { id: 24, color: "black", image: "assets/images/jacket-black.jpeg" },
           { id: 25, color: "white", image: "assets/images/jacket-white.jpeg" },
         ],
+      },
+      {
+        id: 3,
+        name: "Special Jacket",
+        image: "assets/images/jacket-white.jpeg",
+        inventory: 0,
+        details: ["100% cotton"],
+        variants: [
+          { id: 25, color: "white", image: "assets/images/jacket-white.jpeg" },
+        ],
       }
     );
   },
