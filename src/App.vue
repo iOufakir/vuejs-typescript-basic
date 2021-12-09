@@ -25,10 +25,7 @@ export default {
       cart: 0,
       addToCart() {
         this.cart++;
-      },
-      updateImage(productIndex: number, imagePath: string) {
-        this.products[productIndex].image = imagePath;
-      },
+      }
     };
   },
 };

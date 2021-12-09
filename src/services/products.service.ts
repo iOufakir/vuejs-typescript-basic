@@ -7,18 +7,20 @@ export default {
         id: 1,
         name: "Socks",
         image: "assets/images/socks-red.jpg",
-        inventory: 120,
+        brand: "Brand0",
         details: ["50% cotton", "30% wool", "20% polyester"],
         variants: [
           {
             id: 2234,
             color: "red",
             image: "assets/images/socks-red.jpg",
+            quantity: 120,
           },
           {
             id: 2235,
             color: "blue",
             image: "assets/images/socks-blue.png",
+            quantity: 100,
           },
         ],
       },
@@ -26,21 +28,36 @@ export default {
         id: 2,
         name: "Jacket",
         image: "assets/images/jacket-black.jpeg",
-        inventory: 2,
+        brand: "Brand1",
         details: ["50% cotton", "50% polyester"],
         variants: [
-          { id: 24, color: "black", image: "assets/images/jacket-black.jpeg" },
-          { id: 25, color: "white", image: "assets/images/jacket-white.jpeg" },
+          {
+            id: 24,
+            color: "black",
+            image: "assets/images/jacket-black.jpeg",
+            quantity: 12,
+          },
+          {
+            id: 25,
+            color: "white",
+            image: "assets/images/jacket-white.jpeg",
+            quantity: 2,
+          },
         ],
       },
       {
         id: 3,
         name: "Special Jacket",
         image: "assets/images/jacket-white.jpeg",
-        inventory: 0,
+        brand: "Brand2",
         details: ["100% cotton"],
         variants: [
-          { id: 25, color: "white", image: "assets/images/jacket-white.jpeg" },
+          {
+            id: 25,
+            color: "white",
+            image: "assets/images/jacket-white.jpeg",
+            quantity: 0,
+          },
         ],
       }
     );

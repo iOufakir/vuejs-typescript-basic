@@ -2,14 +2,13 @@
   <div class="product">
     <div class="product-details">
       <div class="product-image">
-        <img alt="Product logo image." :src="getImage(product.image)" />
+        <img alt="Product logo image." :src="getImage(image)" />
       </div>
       <div class="product-info">
-        <h1>{{ product.name }}</h1>
-        <p v-if="product.inventory > 10">In Stock</p>
-        <p v-else-if="product.inventory <= 10 && product.inventory > 0">
-          Almost sold out
-        </p>
+        <h1>{{ name }}</h1>
+
+        <p v-if="quantity > 10">In Stock</p>
+        <p v-else-if="quantity <= 10 && quantity > 0">Almost sold out</p>
         <p v-else>Out of Stock</p>
 
         <ul>
@@ -20,9 +19,9 @@
 
         <div class="variants">
           <div
-            v-for="variant in product.variants"
+            v-for="(variant, index) in product.variants"
             :key="variant.id"
-            @mouseover="$parent.updateImage(productIndex, variant.image)"
+            @mouseover="updateVariant(index)"
             class="color-circle"
             :style="{ backgroundColor: variant.color }"
           />
@@ -30,8 +29,8 @@
 
         <button
           class="button"
-          :class="{ disabledButton: product.inventory < 1 }"
-          :disabled="product.inventory < 1"
+          :class="{ disabledButton: quantity < 1 }"
+          :disabled="quantity < 1"
           @click="$parent.addToCart"
         >
           Add to Cart
@@ -43,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import { PropType } from "vue";
+import { computed, PropType } from "vue";
 import { ProductType } from "../utils/types/CommonTypes";
 
 export default {
@@ -57,8 +56,30 @@ export default {
       required: true,
     },
   },
-  data() {
+  data(props: any) {
+    const self = this as any;
+    const product = props.product;
+
+    const name = computed(() => product.brand + " - " + product.name);
+
+    const image = computed(() => {
+      const variantIndex = self.variantIndex;
+      return self.product.variants[variantIndex].image;
+    });
+
+    const quantity = computed(() => {
+      const variantIndex = self.variantIndex;
+      return self.product.variants[variantIndex].quantity;
+    });
+
     return {
+      name,
+      quantity,
+      image,
+      variantIndex: 0,
+      updateVariant(productVariantIndex: number) {
+        this.variantIndex = productVariantIndex;
+      },
       getImage: (imagePath: string): string => {
         return require(`../${imagePath}`);
       },
@@ -114,7 +135,7 @@ export default {
   color: white;
   font-size: 1rem;
   padding: 20px;
-  border: 1px solid white;
+  border: 2px solid black;
   border-radius: 100px;
   cursor: pointer;
   position: relative;
