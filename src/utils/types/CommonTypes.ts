@@ -4,7 +4,7 @@ export interface ProductType {
   image: string;
   brand: string;
   details: Array<string>;
-  variants: Array<ProductVariant>
+  variants: Array<ProductVariant>;
 }
 
 interface ProductVariant {
@@ -15,6 +15,6 @@ interface ProductVariant {
 }
 
 export interface Cart {
-  selectedProduct: ProductType,
+  selectedProduct: ProductType;
   selectedVariantId: number;
 }

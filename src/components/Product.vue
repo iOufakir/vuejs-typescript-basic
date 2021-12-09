@@ -113,7 +113,7 @@ export default {
         selectedProduct: self.currentProduct,
         selectedVariantId: self.selectedVariantId,
       };
-      
+
       self.$emit("add-to-cart", cart);
     },
   },
