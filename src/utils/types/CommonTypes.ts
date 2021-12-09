@@ -13,3 +13,8 @@ interface ProductVariant {
   image: string;
   quantity: number;
 }
+
+export interface Cart {
+  selectedProduct: ProductType,
+  selectedVariantId: number;
+}

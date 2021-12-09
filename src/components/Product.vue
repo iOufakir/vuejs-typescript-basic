@@ -35,7 +35,7 @@
           class="button"
           :class="{ disabledButton: quantity < 1 }"
           :disabled="quantity < 1"
-          @click="$parent.addToCart"
+          @click="addToCart"
         >
           Add to Cart
         </button>
@@ -47,7 +47,7 @@
 
 <script lang="ts">
 import { computed, PropType } from "vue";
-import { ProductType } from "../utils/types/CommonTypes";
+import { Cart, ProductType } from "../utils/types/CommonTypes";
 
 export default {
   name: "Product",
@@ -62,9 +62,11 @@ export default {
   },
   data(props: any) {
     const self = this as any;
-    const product = props.product;
+    const currentProduct = props.product;
 
-    const name = computed(() => product.brand + " - " + product.name);
+    const name = computed(
+      () => currentProduct.brand + " - " + currentProduct.name
+    );
 
     const image = computed(() => {
       const variantIndex = self.variantIndex;
@@ -74,6 +76,11 @@ export default {
     const quantity = computed(() => {
       const variantIndex = self.variantIndex;
       return self.product.variants[variantIndex].quantity;
+    });
+
+    const selectedVariantId = computed(() => {
+      const variantIndex = self.variantIndex;
+      return self.product.variants[variantIndex].id;
     });
 
     const shipping = computed(() => {
@@ -89,6 +96,8 @@ export default {
       shipping,
       image,
       variantIndex: 0,
+      selectedVariantId,
+      currentProduct,
       updateVariant(productVariantIndex: number) {
         this.variantIndex = productVariantIndex;
       },
@@ -96,6 +105,17 @@ export default {
         return require(`../${imagePath}`);
       },
     };
+  },
+  methods: {
+    addToCart() {
+      const self = this as any;
+      const cart: Cart = {
+        selectedProduct: self.currentProduct,
+        selectedVariantId: self.selectedVariantId,
+      };
+      
+      self.$emit("add-to-cart", cart);
+    },
   },
 };
 </script>
