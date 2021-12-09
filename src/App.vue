@@ -2,10 +2,10 @@
   <div>
     <div class="cart">Cart ({{ cart }})</div>
     <product
-      v-for="(product, index) in products"
+      v-for="product in products"
       :key="product.id"
       :product="product"
-      :product-index="index"
+      :premium="true"
     ></product>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
       cart: 0,
       addToCart() {
         this.cart++;
-      }
+      },
     };
   },
 };

@@ -11,6 +11,10 @@
         <p v-else-if="quantity <= 10 && quantity > 0">Almost sold out</p>
         <p v-else>Out of Stock</p>
 
+        <p>
+          Shipping: <span :style="{ fontWeight: 'bold' }">{{ shipping }}</span>
+        </p>
+
         <ul>
           <li v-for="detail in product.details" :key="detail">
             {{ detail }}
@@ -51,8 +55,8 @@ export default {
     product: {
       type: Object as PropType<ProductType>,
     },
-    productIndex: {
-      type: Number,
+    premium: {
+      type: Boolean,
       required: true,
     },
   },
@@ -72,9 +76,17 @@ export default {
       return self.product.variants[variantIndex].quantity;
     });
 
+    const shipping = computed(() => {
+      if (props.premium) {
+        return "FREE";
+      }
+      return 2.99;
+    });
+
     return {
       name,
       quantity,
+      shipping,
       image,
       variantIndex: 0,
       updateVariant(productVariantIndex: number) {
